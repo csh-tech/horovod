@@ -7,6 +7,17 @@
 namespace horovod {
 namespace common {
 
+/**
+ * 旧版本 enum 存在的问题：
+ * - 会发生整形的隐式转换
+ * - 无法指定底层使用的数据类型
+ * - 作用域问题，成员会暴露到上一级作用域中，从而导致不同的枚举体不能使用相同成员
+ * - 编译器实现方法不统一
+ * c++11 enum class/struct (强枚举类型，enum class 和 enum stuct 等价) 特点:
+ * - 不会发生隐式类型转换，但是可以强转
+ * - 底层数据类型可以指定
+ * - 枚举体具有封装性，需要通过域运算符进行访问
+*/
 enum class LogLevel {
   TRACE, DEBUG, INFO, WARNING, ERROR, FATAL
 };
